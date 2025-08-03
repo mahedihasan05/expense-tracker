@@ -60,14 +60,19 @@ function viewAllExpense(){
 
 // Data operations
 
-function calculateTotal(category = null) { 
+function calculateTotal() { 
     /* calculate totals */ 
+    let total = 0;
+    for(const item of expense){
+        total += item.amount;
+    }
+    return total;
 }
 
 const filterExpenses = (category) => {
      /* filter expenses */ 
      const filterExpense = expense.filter(item => item.category === category);
-     console.log("Filter by Category:", filterExpense)
+     console.log("Filter by Category:", filterExpense);
 }
 
 function generateReport() {
