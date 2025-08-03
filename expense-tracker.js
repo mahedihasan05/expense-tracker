@@ -1,4 +1,4 @@
-const expense = [];
+let expense = [];
 
 // Main menu system
 function showMenu() { 
@@ -44,17 +44,26 @@ function viewAllExpense(){
     }
 }
 
-// const editExpense = (id, newAmount, newCategory, newDescription) => {
-//      /* update expense */ 
-//     const editItem = {
-//         id: expense.length + 1,
-//         newAmount: newAmount,
-//         newCategory: newCategory,
-//         newDescription: newDescription
-//     }
-//     expense.push(editItem);
-//     console.log(`Item with ID ${id} is updated successfully.`)
-// }
+const editExpense = (id, newAmount, newCategory, newDescription) => {
+     /* update expense */ 
+    const editItem = expense.map(item => {
+        if(item.id === id){
+            const newExpense = {
+                ...item,
+                amount: newAmount,
+                category: newCategory,
+                description: newDescription
+            }
+            return newExpense;
+        }
+        return item;
+    }
+)
+    expense = editItem;
+    // expense.push(editItem);
+    console.log(expense);
+    console.log(`Item with ID ${id} is updated successfully.`)
+}
 
 
 
