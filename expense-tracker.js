@@ -28,18 +28,25 @@ const addExpense = (amount, category, description = "No description added") => {
     }
     expense.push(item);
     console.log(`Item ${category} is added to expense.`);
-
+    viewExpense();
 }
 
 function removeExpense(id) { 
     /* remove by ID */ 
     expense.splice(id - 1, 1);
-    console.log() 
+    console.log(`Item with ID ${id} removed from expense.`); 
+    viewExpense();
+}
 
+function viewExpense(){
+    for(const item of expense){
+        console.log(`ID: ${item.id}, Amount: ${item.amount}, Category: ${item.category}, Description: ${item.description}`)
+    }
 }
 
 const editExpense = (id, ...updates) => {
      /* update expense */ 
+
 }
 
  
