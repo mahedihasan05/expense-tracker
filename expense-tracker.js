@@ -1,13 +1,13 @@
 let expense = [];
-
+let Category = [];
 // Main menu system
 function showMenu() { 
     /* display options */ 
     console.log(
 `1. addExpense()
 2. viewAllExpense()  
-3. View by Category
-4. Calculate Total
+3. filterExpenses()
+4. calculateTotal()
 5. removeExpense()
 6. Generate Report
 7. Exit
@@ -20,6 +20,7 @@ showMenu();
 // Expense management
 const addExpense = (amount, category, description = "No description added") => { 
     /* add expense */ 
+    // priceByCategory = category;
     const item = {
         id: expense.length + 1,
         amount: amount,
@@ -27,6 +28,25 @@ const addExpense = (amount, category, description = "No description added") => {
         description: description
     }
     expense.push(item);
+    let existingCategory = false;
+
+    for(const item of Category) {
+        if(item.category_name === category) {
+            existingCategory = true;
+        }
+    }
+    //if(!true)
+    if(!existingCategory) {
+        Category.push({category_name: category, total: amount});
+    }
+    else {
+        for(const item of Category) {
+            if(item.category_name === category) {
+                item.total += amount;
+            }
+        }
+    }
+
     console.log(`Item ${category} is added to expense.`);
     viewAllExpense();
 }
@@ -60,7 +80,6 @@ const editExpense = (id, newAmount, newCategory, newDescription) => {
     }
 )
     expense = editItem;
-    // expense.push(editItem);
     console.log(expense);
     console.log(`Item with ID ${id} is updated successfully.`)
 }
@@ -86,9 +105,13 @@ const filterExpenses = (category) => {
 
 function generateReport() {
      /* create expense report */ 
+    for(const item of Category) {
+        console.log(`Category: ${item.category_name}, Total: ${item.total}`);
+    }
+    console.log(`Total Amount: ${calculateTotal()}` )
 }
 
- 
+
 
 // Utility functions
 
